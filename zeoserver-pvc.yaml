@@ -1,0 +1,17 @@
+﻿apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: zeoserver-pvc
+spec:
+  accessModes:
+  - ReadWriteOnce
+  - ReadOnlyMany
+  - ReadWriteMany
+  dataSource: null
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: ""
+  volumeMode: Filesystem
+  volumeName: volume-zeoserver
+status: {}

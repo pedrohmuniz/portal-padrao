@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zeoserver
+  labels:
+    app: plone-zeoserver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: plone-zeoserver
+  template:
+    metadata:
+      labels:
+        app: plone-zeoserver
+    spec:
+      containers:
+      - image: plone/zeoserver
+        imagePullPolicy: Always
+        name: zeoserver
+        ports:
+        - containerPort: 8100
+          name: "zodb"
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /data
+          name: volume-zeoserver 
+      volumes:
+      - name: volume-zeoserver
+        persistentVolumeClaim:
+          claimName: zeoserver-pvc
+status: {}
